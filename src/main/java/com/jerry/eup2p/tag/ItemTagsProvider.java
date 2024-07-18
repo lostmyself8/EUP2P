@@ -1,11 +1,11 @@
 package com.jerry.eup2p.tag;
 
 import appeng.api.features.P2PTunnelAttunement;
+import com.gregtechceu.gtceu.common.data.GTItems;
 import com.jerry.eup2p.EUP2P;
 import com.jerry.eup2p.registry.EUP2PItem;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.block.Block;
 import net.minecraftforge.common.data.ExistingFileHelper;
 import org.jetbrains.annotations.NotNull;
@@ -21,9 +21,8 @@ public class ItemTagsProvider extends net.minecraft.data.tags.ItemTagsProvider {
 
     @Override
     protected void addTags(HolderLookup.@NotNull Provider provider) {
-        var tank = P2PTunnelAttunement.getAttunementTag(EUP2PItem.EU_P2P_TUNNEL::get);
-
-        tag(tank).addOptional(new ResourceLocation("gtceu", "terminal"));
+        tag(P2PTunnelAttunement.getAttunementTag(EUP2PItem.EU_P2P_TUNNEL))
+                .add(GTItems.TERMINAL.asItem());
 
     }
 }

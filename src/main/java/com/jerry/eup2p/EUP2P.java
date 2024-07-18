@@ -5,6 +5,7 @@ import com.jerry.eup2p.config.EUP2PConfig;
 import com.jerry.eup2p.registry.EUP2PItem;
 import com.jerry.eup2p.tag.EUP2PDataGenerators;
 import com.mojang.logging.LogUtils;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.ModLoadingContext;
@@ -24,17 +25,19 @@ public class EUP2P {
         modEventBus.addListener(this::commonSetup);
         EUP2PItem.register(modEventBus);
         modEventBus.addListener(EUP2PDataGenerators::gatherData);
-        modEventBus.addListener((FMLCommonSetupEvent event) -> {
-            event.enqueueWork(this::initializeAttunement);
-        });
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, EUP2PConfig.SPEC);
         MinecraftForge.EVENT_BUS.register(this);
     }
 
+    public static ResourceLocation rl(String path) {
+        return new ResourceLocation(EUP2P.MOD_ID, path);
+    }
+
     private void commonSetup(final FMLCommonSetupEvent event) {
+        event.enqueueWork(this::initializeAttunement);
     }
 
     private void initializeAttunement() {
-        P2PTunnelAttunement.registerAttunementTag(EUP2PItem.EU_P2P_TUNNEL::get);
+        P2PTunnelAttunement.registerAttunementTag(EUP2PItem.EU_P2P_TUNNEL);
     }
 }
