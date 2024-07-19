@@ -13,6 +13,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import net.minecraftforge.registries.ForgeRegistries;
 import org.slf4j.Logger;
 
 @Mod(EUP2P.MOD_ID)
@@ -23,7 +24,7 @@ public class EUP2P {
     public EUP2P() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
         modEventBus.addListener(this::commonSetup);
-        EUP2PItem.register(modEventBus);
+        EUP2PItem.init(ForgeRegistries.ITEMS);
         modEventBus.addListener(EUP2PDataGenerators::gatherData);
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, EUP2PConfig.SPEC);
         MinecraftForge.EVENT_BUS.register(this);
