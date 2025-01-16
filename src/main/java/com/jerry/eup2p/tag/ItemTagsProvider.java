@@ -23,6 +23,5 @@ public class ItemTagsProvider extends net.minecraft.data.tags.ItemTagsProvider {
     protected void addTags(HolderLookup.@NotNull Provider provider) {
         tag(P2PTunnelAttunement.getAttunementTag(EUP2PItem.EU_P2P_TUNNEL))
                 .add(GTItems.TERMINAL.asItem());
-
     }
 }

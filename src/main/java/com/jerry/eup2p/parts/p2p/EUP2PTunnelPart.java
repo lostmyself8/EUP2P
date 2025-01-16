@@ -8,7 +8,6 @@ import appeng.parts.p2p.CapabilityP2PTunnelPart;
 import appeng.parts.p2p.P2PModels;
 import com.gregtechceu.gtceu.api.capability.IEnergyContainer;
 import com.gregtechceu.gtceu.api.capability.forge.GTCapability;
-import com.jerry.eup2p.config.EUP2PConfig;
 import net.minecraft.core.Direction;
 
 import java.util.List;
@@ -46,9 +45,6 @@ public class EUP2PTunnelPart extends CapabilityP2PTunnelPart<EUP2PTunnelPart, IE
             if (outputTunnels == 0 | amperage == 0) {
                 return 0;
             }
-            if (EUP2PConfig.NEED_BALANCE.get() && amperage % outputTunnels != 0) {
-                return 0;
-            }
             //每个输出端的电流
             final long amperagePerOutput = amperage / outputTunnels;
             long overflow = amperagePerOutput == 0 ? amperage : amperage % amperagePerOutput;
@@ -73,7 +69,7 @@ public class EUP2PTunnelPart extends CapabilityP2PTunnelPart<EUP2PTunnelPart, IE
 
         @Override
         public long changeEnergy(long differenceAmount) {
-            int total = 0;
+            long total = 0;
 
             for (EUP2PTunnelPart t : EUP2PTunnelPart.this.getOutputs()) {
                 try (CapabilityGuard capabilityGuard = t.getAdjacentCapability()) {
@@ -86,7 +82,7 @@ public class EUP2PTunnelPart extends CapabilityP2PTunnelPart<EUP2PTunnelPart, IE
 
         @Override
         public long getEnergyStored() {
-            int total = 0;
+            long total = 0;
 
             for (EUP2PTunnelPart t : EUP2PTunnelPart.this.getOutputs()) {
                 try (CapabilityGuard capabilityGuard = t.getAdjacentCapability()) {
@@ -99,7 +95,7 @@ public class EUP2PTunnelPart extends CapabilityP2PTunnelPart<EUP2PTunnelPart, IE
 
         @Override
         public long getEnergyCapacity() {
-            int total = 0;
+            long total = 0;
 
             for (EUP2PTunnelPart t : EUP2PTunnelPart.this.getOutputs()) {
                 try (CapabilityGuard capabilityGuard = t.getAdjacentCapability()) {
@@ -112,7 +108,7 @@ public class EUP2PTunnelPart extends CapabilityP2PTunnelPart<EUP2PTunnelPart, IE
 
         @Override
         public long getInputAmperage() {
-            int total = 0;
+            long total = 0;
 
             for (EUP2PTunnelPart t : EUP2PTunnelPart.this.getOutputs()) {
                 try (CapabilityGuard capabilityGuard = t.getAdjacentCapability()) {
@@ -125,11 +121,11 @@ public class EUP2PTunnelPart extends CapabilityP2PTunnelPart<EUP2PTunnelPart, IE
 
         @Override
         public long getInputVoltage() {
-            int total = 0;
+            long total = 0;
 
             for (EUP2PTunnelPart t : EUP2PTunnelPart.this.getOutputs()) {
                 try (CapabilityGuard capabilityGuard = t.getAdjacentCapability()) {
-                    total += capabilityGuard.get().getInputVoltage();
+                    return capabilityGuard.get().getOutputVoltage();
                 }
             }
 

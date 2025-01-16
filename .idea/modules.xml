@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/EUP2P.main.iml" filepath="$PROJECT_DIR$/.idea/modules/EUP2P.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/EUP2P.test.iml" filepath="$PROJECT_DIR$/.idea/modules/EUP2P.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/com.jerry.EUP2P.test.iml" filepath="$PROJECT_DIR$/.idea/modules/com.jerry.EUP2P.test.iml" />
     </modules>
   </component>
 </project>

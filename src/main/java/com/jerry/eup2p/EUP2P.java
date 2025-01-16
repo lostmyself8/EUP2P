@@ -1,16 +1,13 @@
 package com.jerry.eup2p;
 
 import appeng.api.features.P2PTunnelAttunement;
-import com.jerry.eup2p.config.EUP2PConfig;
 import com.jerry.eup2p.registry.EUP2PItem;
 import com.jerry.eup2p.tag.EUP2PDataGenerators;
 import com.mojang.logging.LogUtils;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -26,7 +23,6 @@ public class EUP2P {
         modEventBus.addListener(this::commonSetup);
         EUP2PItem.init(ForgeRegistries.ITEMS);
         modEventBus.addListener(EUP2PDataGenerators::gatherData);
-        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, EUP2PConfig.SPEC);
         MinecraftForge.EVENT_BUS.register(this);
     }
 
