@@ -10,9 +10,9 @@
 
 You can now find it in the AE2 Tab.
 
-In survival mode, you can use the GTCEU terminal to right-click on any tunnel for attunement.
+In survival mode, you can use the GTM terminal to right-click on any tunnel for attunement.
 
-Specially, you need to install AE2 and GTCEU as the front of this mod.
+Specially, you need to install AE2 and GTM as the front of this mod.
 
 ## What is its function?
 
@@ -22,14 +22,6 @@ You can use it like any other P2P network, and it can connect to GTCEU cables to
 
 Unlike FE P2P Tunnel,AE system will not extract 5% of your power, so you can use it for long-distance power transmission without worrying about voltage loss.
 
-## About configuration!
+## Especially.
 
-It has two modes of dividing the current equally:
-
-The first type : It works when the size of the current is exactly divisible by the number of output ports.
-
-<u>For example, if I input a current of 8 amperes, the system will only work when the number of output ports is 1, 2, 4, or 8.</u>
-
-The second type : The current will be evenly distributed to each output port directly.
-
-You can change its mode in the configuration file, and the default mode is the first one.
+When used with Flux Networks, using Flux Point as the input terminal will result in the output voltage being the same as the voltage of the machine or cable on the output terminal closest to the input terminal.
