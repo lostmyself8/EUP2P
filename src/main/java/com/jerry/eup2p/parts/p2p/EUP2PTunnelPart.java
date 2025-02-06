@@ -1,5 +1,6 @@
 package com.jerry.eup2p.parts.p2p;
 
+import appeng.api.config.PowerUnits;
 import appeng.api.parts.IPartItem;
 import appeng.api.parts.IPartModel;
 import appeng.core.AppEng;
@@ -8,6 +9,7 @@ import appeng.parts.p2p.CapabilityP2PTunnelPart;
 import appeng.parts.p2p.P2PModels;
 import com.gregtechceu.gtceu.api.capability.IEnergyContainer;
 import com.gregtechceu.gtceu.api.capability.forge.GTCapability;
+import com.gregtechceu.gtceu.config.ConfigHolder;
 import net.minecraft.core.Direction;
 
 import java.util.List;
@@ -53,31 +55,26 @@ public class EUP2PTunnelPart extends CapabilityP2PTunnelPart<EUP2PTunnelPart, IE
                 try (CapabilityGuard capabilityGuard = target.getAdjacentCapability()) {
                     final IEnergyContainer output = capabilityGuard.get();
                     final long toSend = amperagePerOutput + overflow;
-                    final long received = output.acceptEnergyFromNetwork(side, voltage, toSend);
+                    final long received = output.acceptEnergyFromNetwork(target.getSide().getOpposite(), voltage, toSend);
 
                     overflow = toSend - received;
                     total += received;
                 }
+            }
+            if (total > 0) {
+                EUP2PTunnelPart.this.queueTunnelDrain(PowerUnits.FE, (double) total * voltage * ConfigHolder.INSTANCE.compat.energy.euToPlatformRatio);
             }
             return total;
         }
 
         @Override
         public boolean inputsEnergy(Direction side) {
-            return true;
+            return EUP2PTunnelPart.this.getSide() == side;
         }
 
         @Override
         public long changeEnergy(long differenceAmount) {
-            long total = 0;
-
-            for (EUP2PTunnelPart t : EUP2PTunnelPart.this.getOutputs()) {
-                try (CapabilityGuard capabilityGuard = t.getAdjacentCapability()) {
-                    total += capabilityGuard.get().changeEnergy(differenceAmount);
-                }
-            }
-
-            return total;
+            return 0;
         }
 
         @Override
@@ -86,7 +83,11 @@ public class EUP2PTunnelPart extends CapabilityP2PTunnelPart<EUP2PTunnelPart, IE
 
             for (EUP2PTunnelPart t : EUP2PTunnelPart.this.getOutputs()) {
                 try (CapabilityGuard capabilityGuard = t.getAdjacentCapability()) {
-                    total += capabilityGuard.get().getEnergyStored();
+                    try {
+                        total = Math.addExact(total, capabilityGuard.get().getEnergyCapacity());
+                    } catch (ArithmeticException e) {
+                        return 0;
+                    }
                 }
             }
 
@@ -99,7 +100,11 @@ public class EUP2PTunnelPart extends CapabilityP2PTunnelPart<EUP2PTunnelPart, IE
 
             for (EUP2PTunnelPart t : EUP2PTunnelPart.this.getOutputs()) {
                 try (CapabilityGuard capabilityGuard = t.getAdjacentCapability()) {
-                    total += capabilityGuard.get().getEnergyCapacity();
+                    try {
+                        total = Math.addExact(total, capabilityGuard.get().getEnergyCapacity());
+                    } catch (ArithmeticException e) {
+                        return Long.MAX_VALUE;
+                    }
                 }
             }
 
@@ -112,7 +117,11 @@ public class EUP2PTunnelPart extends CapabilityP2PTunnelPart<EUP2PTunnelPart, IE
 
             for (EUP2PTunnelPart t : EUP2PTunnelPart.this.getOutputs()) {
                 try (CapabilityGuard capabilityGuard = t.getAdjacentCapability()) {
-                    total += capabilityGuard.get().getInputAmperage();
+                    try {
+                        total = Math.addExact(total, capabilityGuard.get().getInputAmperage());
+                    } catch (ArithmeticException e) {
+                        return Long.MAX_VALUE;
+                    }
                 }
             }
 
@@ -125,6 +134,9 @@ public class EUP2PTunnelPart extends CapabilityP2PTunnelPart<EUP2PTunnelPart, IE
 
             for (EUP2PTunnelPart t : EUP2PTunnelPart.this.getOutputs()) {
                 try (CapabilityGuard capabilityGuard = t.getAdjacentCapability()) {
+                    //返回电压最大的一个端口的电压
+//                    total = Math.max(total, capabilityGuard.get().getOutputVoltage());
+                    //返回第一个端口的电压
                     return capabilityGuard.get().getOutputVoltage();
                 }
             }
@@ -137,9 +149,10 @@ public class EUP2PTunnelPart extends CapabilityP2PTunnelPart<EUP2PTunnelPart, IE
 
         @Override
         public long acceptEnergyFromNetwork(Direction side, long voltage, long amperage) {
-            try (CapabilityGuard input = getInputCapability()) {
-                return input.get().acceptEnergyFromNetwork(side, voltage, amperage);
-            }
+//            try (CapabilityGuard input = getInputCapability()) {
+//                return input.get().acceptEnergyFromNetwork(side, voltage, amperage);
+//            }
+            return 0;
         }
 
         @Override
@@ -149,14 +162,12 @@ public class EUP2PTunnelPart extends CapabilityP2PTunnelPart<EUP2PTunnelPart, IE
 
         @Override
         public boolean outputsEnergy(Direction side) {
-            return true;
+            return EUP2PTunnelPart.this.getSide() == side;
         }
 
         @Override
         public long changeEnergy(long differenceAmount) {
-            try (CapabilityGuard input = getInputCapability()) {
-                return input.get().changeEnergy(differenceAmount);
-            }
+            return 0;
         }
 
         @Override
@@ -175,13 +186,23 @@ public class EUP2PTunnelPart extends CapabilityP2PTunnelPart<EUP2PTunnelPart, IE
 
         @Override
         public long getInputAmperage() {
+            return 0;
+        }
+
+        @Override
+        public long getInputVoltage() {
+            return 0;
+        }
+
+        @Override
+        public long getOutputAmperage() {
             try (CapabilityGuard input = getInputCapability()) {
                 return input.get().getEnergyStored();
             }
         }
 
         @Override
-        public long getInputVoltage() {
+        public long getOutputVoltage() {
             try (CapabilityGuard input = getInputCapability()) {
                 return input.get().getEnergyStored();
             }
