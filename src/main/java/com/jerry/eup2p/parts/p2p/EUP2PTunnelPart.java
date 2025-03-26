@@ -41,13 +41,13 @@ public class EUP2PTunnelPart extends CapabilityP2PTunnelPart<EUP2PTunnelPart, IE
         @Override
         public long acceptEnergyFromNetwork(Direction side, long voltage, long amperage) {
             long total = 0;
-            //获取输出端个数
+            // 获取输出端个数
             final int outputTunnels = EUP2PTunnelPart.this.getOutputs().size();
-            //如果输出端个数和电流都不为0则为false
+            // 如果输出端个数和电流都不为0则为false
             if (outputTunnels == 0 | amperage == 0) {
                 return 0;
             }
-            //每个输出端的电流
+            // 每个输出端的电流
             final long amperagePerOutput = amperage / outputTunnels;
             long overflow = amperagePerOutput == 0 ? amperage : amperage % amperagePerOutput;
 
@@ -84,7 +84,7 @@ public class EUP2PTunnelPart extends CapabilityP2PTunnelPart<EUP2PTunnelPart, IE
             for (EUP2PTunnelPart t : EUP2PTunnelPart.this.getOutputs()) {
                 try (CapabilityGuard capabilityGuard = t.getAdjacentCapability()) {
                     try {
-                        total = Math.addExact(total, capabilityGuard.get().getEnergyCapacity());
+                        total = Math.addExact(total, capabilityGuard.get().getEnergyStored());
                     } catch (ArithmeticException e) {
                         return 0;
                     }
@@ -103,6 +103,7 @@ public class EUP2PTunnelPart extends CapabilityP2PTunnelPart<EUP2PTunnelPart, IE
                     try {
                         total = Math.addExact(total, capabilityGuard.get().getEnergyCapacity());
                     } catch (ArithmeticException e) {
+                        // 如果超过了long那就返回long
                         return Long.MAX_VALUE;
                     }
                 }
@@ -120,6 +121,7 @@ public class EUP2PTunnelPart extends CapabilityP2PTunnelPart<EUP2PTunnelPart, IE
                     try {
                         total = Math.addExact(total, capabilityGuard.get().getInputAmperage());
                     } catch (ArithmeticException e) {
+                        // 如果超过了long那就返回long
                         return Long.MAX_VALUE;
                     }
                 }
@@ -134,10 +136,10 @@ public class EUP2PTunnelPart extends CapabilityP2PTunnelPart<EUP2PTunnelPart, IE
 
             for (EUP2PTunnelPart t : EUP2PTunnelPart.this.getOutputs()) {
                 try (CapabilityGuard capabilityGuard = t.getAdjacentCapability()) {
-                    //返回电压最大的一个端口的电压
-//                    total = Math.max(total, capabilityGuard.get().getOutputVoltage());
-                    //返回第一个端口的电压
-                    return capabilityGuard.get().getOutputVoltage();
+                    // 返回电压最大的一个端口的电压
+                    total = Math.max(total, capabilityGuard.get().getInputVoltage());
+                    // 返回最远的端口所连接的机器或者线缆的电压
+//                    return capabilityGuard.get().getInputVoltage();
                 }
             }
 
@@ -149,9 +151,6 @@ public class EUP2PTunnelPart extends CapabilityP2PTunnelPart<EUP2PTunnelPart, IE
 
         @Override
         public long acceptEnergyFromNetwork(Direction side, long voltage, long amperage) {
-//            try (CapabilityGuard input = getInputCapability()) {
-//                return input.get().acceptEnergyFromNetwork(side, voltage, amperage);
-//            }
             return 0;
         }
 
@@ -180,7 +179,7 @@ public class EUP2PTunnelPart extends CapabilityP2PTunnelPart<EUP2PTunnelPart, IE
         @Override
         public long getEnergyCapacity() {
             try (CapabilityGuard input = getInputCapability()) {
-                return input.get().getEnergyStored();
+                return input.get().getEnergyCapacity();
             }
         }
 
@@ -190,15 +189,15 @@ public class EUP2PTunnelPart extends CapabilityP2PTunnelPart<EUP2PTunnelPart, IE
         }
 
         @Override
-        public long getInputVoltage() {
-            return 0;
-        }
-
-        @Override
         public long getOutputAmperage() {
             try (CapabilityGuard input = getInputCapability()) {
                 return input.get().getEnergyStored();
             }
+        }
+
+        @Override
+        public long getInputVoltage() {
+            return 0;
         }
 
         @Override
