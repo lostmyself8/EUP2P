@@ -191,7 +191,7 @@ public class EUP2PTunnelPart extends CapabilityP2PTunnelPart<EUP2PTunnelPart, IE
         @Override
         public long getOutputAmperage() {
             try (CapabilityGuard input = getInputCapability()) {
-                return input.get().getEnergyStored();
+                return input.get().getOutputAmperage();
             }
         }
 
@@ -203,7 +203,7 @@ public class EUP2PTunnelPart extends CapabilityP2PTunnelPart<EUP2PTunnelPart, IE
         @Override
         public long getOutputVoltage() {
             try (CapabilityGuard input = getInputCapability()) {
-                return input.get().getEnergyStored();
+                return input.get().getOutputVoltage();
             }
         }
     }
