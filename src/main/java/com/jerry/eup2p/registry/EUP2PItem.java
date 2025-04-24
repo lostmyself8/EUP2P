@@ -9,6 +9,7 @@ import appeng.items.parts.PartItem;
 import appeng.items.parts.PartModelsHelper;
 import com.jerry.eup2p.EUP2P;
 import com.jerry.eup2p.parts.p2p.EUP2PTunnelPart;
+import com.jerry.eup2p.parts.p2p.LaserP2PTunnelPart;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -35,6 +36,7 @@ public class EUP2PItem {
 //    });
 
     public static final ItemDefinition<PartItem<EUP2PTunnelPart>> EU_P2P_TUNNEL = part("EU P2P Tunnel", "eu_p2p_tunnel", EUP2PTunnelPart.class, EUP2PTunnelPart::new);
+    public static final ItemDefinition<PartItem<LaserP2PTunnelPart>> LASER_P2P_TUNNEL = part("Laser P2P Tunnel", "laser_p2p_tunnel", LaserP2PTunnelPart.class, LaserP2PTunnelPart::new);
 
     private static <T extends IPart> ItemDefinition<PartItem<T>> part(String englishName, String id, Class<T> partClass, Function<IPartItem<T>, T> factory) {
         PartModels.registerModels(PartModelsHelper.createModels(partClass));
