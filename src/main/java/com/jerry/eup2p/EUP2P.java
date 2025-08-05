@@ -4,6 +4,7 @@ import appeng.api.parts.RegisterPartCapabilitiesEvent;
 import com.gregtechceu.gtceu.api.capability.forge.GTCapability;
 import com.jerry.eup2p.parts.p2p.EUP2PTunnelPart;
 import com.jerry.eup2p.registries.EUP2PItem;
+import com.jerry.eup2p.tag.EUP2PDataGenerators;
 import com.mojang.logging.LogUtils;
 import net.minecraft.resources.ResourceLocation;
 import net.neoforged.bus.api.IEventBus;
@@ -18,6 +19,7 @@ public class EUP2P {
 
     public EUP2P(IEventBus modEventBus, ModContainer modContainer) {
         partCapabilities(modEventBus);
+        modEventBus.addListener(EUP2PDataGenerators::gatherData);
         EUP2PItem.DR_ITEMS.register(modEventBus);
     }
 
