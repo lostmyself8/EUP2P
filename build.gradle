@@ -105,8 +105,8 @@ dependencies {
     // compileOnly "mezz.jei:jei-${mc_version}-forge-api:${jei_version}"
     // runtimeOnly "mezz.jei:jei-${mc_version}-forge:${jei_version}"
     compileOnly "curse.maven:ldlib-626676:5782845"
-    compileOnly "curse.maven:configuration-444699:5587875"
-    implementation "curse.maven:gregtechceu-modern-890405:5493708"
+    runtimeOnly "curse.maven:configuration-444699:6779573"
+    implementation "curse.maven:gregtechceu-modern-890405:6766269"
 
     implementation "curse.maven:applied-energistics-2-223794:5593097"
 }

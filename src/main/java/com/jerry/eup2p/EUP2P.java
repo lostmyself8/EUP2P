@@ -1,7 +1,7 @@
 package com.jerry.eup2p;
 
 import appeng.api.parts.RegisterPartCapabilitiesEvent;
-import com.gregtechceu.gtceu.api.capability.forge.GTCapability;
+import com.gregtechceu.gtceu.api.capability.GTCapability;
 import com.jerry.eup2p.parts.p2p.EUP2PTunnelPart;
 import com.jerry.eup2p.registries.EUP2PItem;
 import com.jerry.eup2p.tag.EUP2PDataGenerators;
