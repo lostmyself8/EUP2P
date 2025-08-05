@@ -1,6 +1,6 @@
 package com.jerry.eup2p.tag;
 
-import net.minecraftforge.data.event.GatherDataEvent;
+import net.neoforged.neoforge.data.event.GatherDataEvent;
 
 public class EUP2PDataGenerators {
 

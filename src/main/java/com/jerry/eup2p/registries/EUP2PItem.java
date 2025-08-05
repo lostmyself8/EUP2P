@@ -1,4 +1,4 @@
-package com.jerry.eup2p.registry;
+package com.jerry.eup2p.registries;
 
 import appeng.api.parts.IPart;
 import appeng.api.parts.IPartItem;
@@ -9,11 +9,8 @@ import appeng.items.parts.PartItem;
 import appeng.items.parts.PartModelsHelper;
 import com.jerry.eup2p.EUP2P;
 import com.jerry.eup2p.parts.p2p.EUP2PTunnelPart;
-import com.jerry.eup2p.parts.p2p.LaserP2PTunnelPart;
 import net.minecraft.world.item.Item;
-import net.minecraftforge.registries.DeferredRegister;
-import net.minecraftforge.registries.ForgeRegistries;
-import net.minecraftforge.registries.IForgeRegistry;
+import net.neoforged.neoforge.registries.DeferredRegister;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -21,7 +18,8 @@ import java.util.List;
 import java.util.function.Function;
 
 public class EUP2PItem {
-    private static final DeferredRegister<Item> EUP2P_ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, EUP2P.MOD_ID);
+
+    public static final DeferredRegister.Items DR_ITEMS = DeferredRegister.createItems(EUP2P.MOD_ID);
 
     public static final List<ItemDefinition<?>> ITEMS = new ArrayList<>();
 
@@ -29,14 +27,7 @@ public class EUP2PItem {
         return Collections.unmodifiableList(ITEMS);
     }
 
-//    public static final RegistryObject<PartItem<EUP2PTunnelPart>> EU_P2P_TUNNEL = Util.make(() -> {
-//        PartModels.registerModels(PartModelsHelper.createModels(EUP2PTunnelPart.class));
-//        return EUP2P_ITEMS.register("eu_p2p_tunnel",
-//                () -> new PartItem<>(new Item.Properties(), EUP2PTunnelPart.class, EUP2PTunnelPart::new));
-//    });
-
     public static final ItemDefinition<PartItem<EUP2PTunnelPart>> EU_P2P_TUNNEL = part("EU P2P Tunnel", "eu_p2p_tunnel", EUP2PTunnelPart.class, EUP2PTunnelPart::new);
-    public static final ItemDefinition<PartItem<LaserP2PTunnelPart>> LASER_P2P_TUNNEL = part("Laser P2P Tunnel", "laser_p2p_tunnel", LaserP2PTunnelPart.class, LaserP2PTunnelPart::new);
 
     private static <T extends IPart> ItemDefinition<PartItem<T>> part(String englishName, String id, Class<T> partClass, Function<IPartItem<T>, T> factory) {
         PartModels.registerModels(PartModelsHelper.createModels(partClass));
@@ -44,17 +35,18 @@ public class EUP2PItem {
     }
 
     private static <T extends Item> ItemDefinition<T> item(String englishName, String id, Function<Item.Properties, T> factory) {
-        ItemDefinition<T> definition = new ItemDefinition<>(englishName, EUP2P.rl(id), factory.apply(new Item.Properties()));
+        new Item.Properties();
+        ItemDefinition<T> definition = new ItemDefinition<>(englishName, DR_ITEMS.registerItem(id, factory));
         MainCreativeTab.add(definition);
         ITEMS.add(definition);
         return definition;
     }
 
-    public static void init(IForgeRegistry<Item> registry) {
-        for (ItemDefinition<?> definition : EUP2PItem.getItems()) {
-            registry.register(definition.id(), definition.asItem());
-        }
-    }
+//    public static void init(ResourceKey<Registry<Item>> registry) {
+//        for (ItemDefinition<?> definition : EUP2PItem.getItems()) {
+//            registry.register(definition.id(), definition.asItem());
+//        }
+//    }
 
 //    public static void register(IEventBus eventBus) {
 //        EUP2P_ITEMS.register(eventBus);

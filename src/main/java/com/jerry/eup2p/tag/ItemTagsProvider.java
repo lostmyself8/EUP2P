@@ -1,14 +1,14 @@
 package com.jerry.eup2p.tag;
 
 import appeng.api.features.P2PTunnelAttunement;
-import com.gregtechceu.gtceu.common.data.GTBlocks;
-import com.gregtechceu.gtceu.common.data.GTItems;
+import com.gregtechceu.gtceu.data.block.GTBlocks;
+import com.gregtechceu.gtceu.data.item.GTItems;
 import com.jerry.eup2p.EUP2P;
-import com.jerry.eup2p.registry.EUP2PItem;
+import com.jerry.eup2p.registries.EUP2PItem;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.level.block.Block;
-import net.minecraftforge.common.data.ExistingFileHelper;
+import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -22,9 +22,9 @@ public class ItemTagsProvider extends net.minecraft.data.tags.ItemTagsProvider {
 
     @Override
     protected void addTags(HolderLookup.@NotNull Provider provider) {
-        tag(P2PTunnelAttunement.getAttunementTag(EUP2PItem.EU_P2P_TUNNEL))
-                .add(GTItems.TERMINAL.asItem());
-        tag(P2PTunnelAttunement.getAttunementTag(EUP2PItem.LASER_P2P_TUNNEL))
-                .add(GTBlocks.LASER_PIPES[1].asItem());
+//        tag(P2PTunnelAttunement.getAttunementTag(EUP2PItem.EU_P2P_TUNNEL))
+//                .add(GTItems.TERMINAL);
+//        tag(P2PTunnelAttunement.getAttunementTag(EUP2PItem.LASER_P2P_TUNNEL))
+//                .add(GTBlocks.LASER_PIPES[1].asItem());
     }
 }
