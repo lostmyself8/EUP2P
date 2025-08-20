@@ -11,7 +11,7 @@
 
 You can now find it in the AE2 Tab.
 
-In survival mode, you can use the GTM terminal to right-click on any tunnel for attunement.
+In survival mode, you can use the GTM's wire or cable to right-click on any tunnel for attunement.
 
 Specially, you need to install AE2 and GTM as the front of this mod.
 
