@@ -1,4 +1,4 @@
-package com.jerry.eup2p.registry;
+package com.jerry.eup2p.common.registry;
 
 import appeng.api.parts.IPart;
 import appeng.api.parts.IPartItem;
@@ -8,8 +8,8 @@ import appeng.core.definitions.ItemDefinition;
 import appeng.items.parts.PartItem;
 import appeng.items.parts.PartModelsHelper;
 import com.jerry.eup2p.EUP2P;
-import com.jerry.eup2p.parts.p2p.EUP2PTunnelPart;
-import com.jerry.eup2p.parts.p2p.LaserP2PTunnelPart;
+import com.jerry.eup2p.common.parts.p2p.EUP2PTunnelPart;
+import com.jerry.eup2p.common.parts.p2p.LaserP2PTunnelPart;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;

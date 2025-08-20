@@ -1,4 +1,4 @@
-package com.jerry.eup2p.tag;
+package com.jerry.eup2p.common.tag;
 
 import net.minecraftforge.data.event.GatherDataEvent;
 

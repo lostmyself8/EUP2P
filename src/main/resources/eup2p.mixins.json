@@ -3,7 +3,7 @@
   "minVersion": "0.8",
   "package": "com.jerry.eup2p.mixin",
   "compatibilityLevel": "JAVA_8",
-  "refmap": "EUP2P.refmap.json",
+  "refmap": "eup2p.refmap.json",
   "mixins": [
   ],
   "client": [

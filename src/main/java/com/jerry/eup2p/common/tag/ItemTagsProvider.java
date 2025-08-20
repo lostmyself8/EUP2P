@@ -1,10 +1,10 @@
-package com.jerry.eup2p.tag;
+package com.jerry.eup2p.common.tag;
 
 import appeng.api.features.P2PTunnelAttunement;
 import com.gregtechceu.gtceu.common.data.GTBlocks;
-import com.gregtechceu.gtceu.common.data.GTItems;
+import com.gregtechceu.gtceu.common.data.GTMaterialBlocks;
 import com.jerry.eup2p.EUP2P;
-import com.jerry.eup2p.registry.EUP2PItem;
+import com.jerry.eup2p.common.registry.EUP2PItem;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.level.block.Block;
@@ -22,8 +22,12 @@ public class ItemTagsProvider extends net.minecraft.data.tags.ItemTagsProvider {
 
     @Override
     protected void addTags(HolderLookup.@NotNull Provider provider) {
-        tag(P2PTunnelAttunement.getAttunementTag(EUP2PItem.EU_P2P_TUNNEL))
-                .add(GTItems.TERMINAL.asItem());
+        GTMaterialBlocks.CABLE_BLOCKS.rowMap().forEach((prefix, map) -> {
+            map.forEach((material, blockEntry) -> {
+                tag(P2PTunnelAttunement.getAttunementTag(EUP2PItem.EU_P2P_TUNNEL))
+                        .add(blockEntry.asItem());
+            });
+        });
         tag(P2PTunnelAttunement.getAttunementTag(EUP2PItem.LASER_P2P_TUNNEL))
                 .add(GTBlocks.LASER_PIPES[1].asItem());
     }

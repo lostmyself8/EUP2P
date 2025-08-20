@@ -1,8 +1,10 @@
 package com.jerry.eup2p;
 
 import appeng.api.features.P2PTunnelAttunement;
-import com.jerry.eup2p.registry.EUP2PItem;
-import com.jerry.eup2p.tag.EUP2PDataGenerators;
+import com.gregtechceu.gtceu.api.capability.forge.GTCapability;
+import com.jerry.eup2p.common.GuiLang;
+import com.jerry.eup2p.common.registry.EUP2PItem;
+import com.jerry.eup2p.common.tag.EUP2PDataGenerators;
 import com.mojang.logging.LogUtils;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
@@ -36,5 +38,8 @@ public class EUP2P {
 
     private void initializeAttunement() {
         P2PTunnelAttunement.registerAttunementTag(EUP2PItem.EU_P2P_TUNNEL);
+        P2PTunnelAttunement.registerAttunementApi(EUP2PItem.EU_P2P_TUNNEL,
+                GTCapability.CAPABILITY_ELECTRIC_ITEM,
+                GuiLang.P2P_ATTUNEMENT_EU.text());
     }
 }
