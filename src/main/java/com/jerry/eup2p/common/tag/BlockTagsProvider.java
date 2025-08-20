@@ -1,4 +1,4 @@
-package com.jerry.eup2p.tag;
+package com.jerry.eup2p.common.tag;
 
 import appeng.datagen.providers.IAE2DataProvider;
 import com.jerry.eup2p.EUP2P;

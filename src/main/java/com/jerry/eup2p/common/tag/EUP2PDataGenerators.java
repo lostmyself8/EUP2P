@@ -1,4 +1,4 @@
-package com.jerry.eup2p.tag;
+package com.jerry.eup2p.common.tag;
 
 import net.neoforged.neoforge.data.event.GatherDataEvent;
 
