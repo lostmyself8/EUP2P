@@ -1,4 +1,4 @@
-package com.jerry.eup2p.parts.p2p;
+package com.jerry.eup2p.common.parts.p2p;
 
 import appeng.api.config.PowerUnit;
 import appeng.api.parts.IPartItem;

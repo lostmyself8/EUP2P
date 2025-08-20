@@ -30,9 +30,14 @@ repositories {
             includeGroup 'dev.toma.configuration'
         }
     }
-    //re
-    maven { url = 'https://maven.tterrag.com/'
-        content {
+    //registrate
+    exclusiveContent {
+        forRepository {
+            maven {
+                url = "https://maven.ithundxr.dev/snapshots/"
+            }
+        }
+        filter {
             includeGroup "com.tterrag.registrate"
         }
     }
@@ -99,11 +104,8 @@ neoForge {
 sourceSets.main.resources { srcDir 'src/generated/resources' }
 
 dependencies {
-    // Example mod dependency with JEI
-    // The JEI API is declared for compile time use, while the full JEI artifact is used at runtime
-    // compileOnly "mezz.jei:jei-${mc_version}-common-api:${jei_version}"
-    // compileOnly "mezz.jei:jei-${mc_version}-forge-api:${jei_version}"
-    // runtimeOnly "mezz.jei:jei-${mc_version}-forge:${jei_version}"
+    compileOnly "com.tterrag.registrate:Registrate:MC1.21-1.3.0+67"
+
     compileOnly "curse.maven:ldlib-626676:5782845"
     compileOnly "curse.maven:configuration-444699:5587875"
     implementation "curse.maven:gregtechceu-modern-890405:5493708"
