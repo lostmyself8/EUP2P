@@ -38,8 +38,13 @@ public class EUP2P {
 
     private void initializeAttunement() {
         P2PTunnelAttunement.registerAttunementTag(EUP2PItem.EU_P2P_TUNNEL);
+        P2PTunnelAttunement.registerAttunementTag(EUP2PItem.LASER_P2P_TUNNEL);
+
         P2PTunnelAttunement.registerAttunementApi(EUP2PItem.EU_P2P_TUNNEL,
                 GTCapability.CAPABILITY_ELECTRIC_ITEM,
                 GuiLang.P2P_ATTUNEMENT_EU.text());
+        P2PTunnelAttunement.registerAttunementApi(EUP2PItem.LASER_P2P_TUNNEL,
+                GTCapability.CAPABILITY_LASER,
+                GuiLang.P2P_ATTUNEMENT_LASER.text());
     }
 }

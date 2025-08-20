@@ -6,7 +6,8 @@ import org.jetbrains.annotations.Nullable;
 
 public enum GuiLang implements LocalizationEnum {
 
-    P2P_ATTUNEMENT_EU("Portable EU Energy Storage (i.e. Batteries)");
+    P2P_ATTUNEMENT_EU("Portable EU Energy Storage (i.e. Batteries)"),
+    P2P_ATTUNEMENT_LASER("Items capable of storing or transmitting lasers (i.e. Normal Laser Pipe)");
 
     private final String root;
 
