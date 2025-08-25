@@ -1,10 +1,14 @@
 package com.jerry.eup2p.common.tag;
 
 import appeng.api.features.P2PTunnelAttunement;
+import com.gregtechceu.gtceu.api.machine.MachineDefinition;
+import com.gregtechceu.gtceu.common.block.LaserPipeBlock;
 import com.gregtechceu.gtceu.common.data.GTBlocks;
+import com.gregtechceu.gtceu.common.data.GTMachines;
 import com.gregtechceu.gtceu.common.data.GTMaterialBlocks;
 import com.jerry.eup2p.EUP2P;
 import com.jerry.eup2p.common.registry.EUP2PItem;
+import com.tterrag.registrate.util.entry.BlockEntry;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
 import net.minecraft.world.level.block.Block;
@@ -28,7 +32,22 @@ public class ItemTagsProvider extends net.minecraft.data.tags.ItemTagsProvider {
                         .add(blockEntry.asItem());
             });
         });
-        tag(P2PTunnelAttunement.getAttunementTag(EUP2PItem.LASER_P2P_TUNNEL))
-                .add(GTBlocks.LASER_PIPES[1].asItem());
+        for (BlockEntry<LaserPipeBlock> laser : GTBlocks.LASER_PIPES) {
+            tag(P2PTunnelAttunement.getAttunementTag(EUP2PItem.LASER_P2P_TUNNEL))
+                    .add(laser.asItem());
+        }
+//        add(GTMachines.LASER_INPUT_HATCH_256);
+//        add(GTMachines.LASER_OUTPUT_HATCH_256);
+//        add(GTMachines.LASER_INPUT_HATCH_1024);
+//        add(GTMachines.LASER_OUTPUT_HATCH_1024);
+//        add(GTMachines.LASER_INPUT_HATCH_4096);
+//        add(GTMachines.LASER_OUTPUT_HATCH_4096);
     }
+
+//    private void add(MachineDefinition[] machineDefinitions) {
+//        for (MachineDefinition hatch : machineDefinitions) {
+//            tag(P2PTunnelAttunement.getAttunementTag(EUP2PItem.LASER_P2P_TUNNEL))
+//                    .add(hatch.getItem());
+//        }
+//    }
 }
