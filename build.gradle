@@ -109,25 +109,25 @@ repositories {
 dependencies {
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
 
-    runtimeOnly fg.deobf("mezz.jei:jei-${minecraft_version}-forge:${jei_version}")
+    runtimeOnly "mezz.jei:jei-${minecraft_version}-forge:${jei_version}"
 
-    compileOnly fg.deobf("com.tterrag.registrate:Registrate:${registrate_version}")
+    compileOnly "com.tterrag.registrate:Registrate:${registrate_version}"
 
-//    runtimeOnly fg.deobf("com.lowdragmc.ldlib:ldlib-forge-${minecraft_version}:${ldlib_version}"){ transitive = false }
-//    implementation fg.deobf("com.gregtechceu.gtceu:gtceu-${minecraft_version}:${gregtech_version}:slim"){ transitive = false }
-//    runtimeOnly fg.deobf("dev.toma.configuration:configuration-forge-${minecraft_version}:${configuration_version}"){ transitive = false }
+//    runtimeOnly "com.lowdragmc.ldlib:ldlib-forge-${minecraft_version}:${ldlib_version}"){ transitive = false }
+//    implementation "com.gregtechceu.gtceu:gtceu-${minecraft_version}:${gregtech_version}:slim"){ transitive = false }
+//    runtimeOnly "dev.toma.configuration:configuration-forge-${minecraft_version}:${configuration_version}"){ transitive = false }
 
-    implementation fg.deobf("curse.maven:gregtechceu-modern-890405:7625262")
-    runtimeOnly fg.deobf("curse.maven:configuration-444699:5840405")
-    runtimeOnly fg.deobf("curse.maven:ldlib-626676:7652228")
+    implementation "curse.maven:gregtechceu-modern-890405:7625262"
+    runtimeOnly "curse.maven:configuration-444699:5840405"
+    runtimeOnly "curse.maven:ldlib-626676:7652228"
 
 //    implementation 'com.github.GregTechCEu:GregTech-Modern:1.20.1'
 //    implementation files('lib/gtceu-1.20.1-1.3.1-build_901.jar')
 
-    runtimeOnly fg.deobf("curse.maven:jade-324717:${jade_id}")
-    implementation fg.deobf("curse.maven:flux-networks-248020:5234697")
+    runtimeOnly "curse.maven:jade-324717:${jade_id}"
+    implementation "curse.maven:flux-networks-248020:5234697"
 
-    implementation fg.deobf("appeng:appliedenergistics2-forge:${ae2_version}")
+    implementation "appeng:appliedenergistics2-forge:${ae2_version}"
 
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
 }
