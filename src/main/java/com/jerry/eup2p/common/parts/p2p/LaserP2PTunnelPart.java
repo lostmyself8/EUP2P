@@ -1,5 +1,6 @@
 package com.jerry.eup2p.common.parts.p2p;
 
+import appeng.api.config.PowerUnits;
 import appeng.api.parts.IPartItem;
 import appeng.api.parts.IPartModel;
 import appeng.core.AppEng;
@@ -8,6 +9,7 @@ import appeng.parts.p2p.CapabilityP2PTunnelPart;
 import appeng.parts.p2p.P2PModels;
 import com.gregtechceu.gtceu.api.capability.ILaserContainer;
 import com.gregtechceu.gtceu.api.capability.forge.GTCapability;
+import com.gregtechceu.gtceu.config.ConfigHolder;
 import net.minecraft.core.Direction;
 
 import java.util.List;
@@ -59,9 +61,9 @@ public class LaserP2PTunnelPart extends CapabilityP2PTunnelPart<LaserP2PTunnelPa
                     total += received;
                 }
             }
-//            if (total > 0) {
-//                LaserP2PTunnelPart.this.queueTunnelDrain(PowerUnits.FE, (double) total * voltage * ConfigHolder.INSTANCE.compat.energy.euToFeRatio);
-//            }
+            if (total > 0) {
+                deductEnergyCost((double) total * voltage * ConfigHolder.INSTANCE.compat.energy.euToFeRatio, PowerUnits.FE);
+            }
             return total;
         }
 

@@ -1,10 +1,9 @@
 package com.jerry.eup2p.common.tag;
 
 import appeng.api.features.P2PTunnelAttunement;
-import com.gregtechceu.gtceu.api.machine.MachineDefinition;
+import appeng.datagen.providers.IAE2DataProvider;
 import com.gregtechceu.gtceu.common.block.LaserPipeBlock;
 import com.gregtechceu.gtceu.common.data.GTBlocks;
-import com.gregtechceu.gtceu.common.data.GTMachines;
 import com.gregtechceu.gtceu.common.data.GTMaterialBlocks;
 import com.jerry.eup2p.EUP2P;
 import com.jerry.eup2p.common.registry.EUP2PItem;
@@ -18,7 +17,8 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.concurrent.CompletableFuture;
 
-public class ItemTagsProvider extends net.minecraft.data.tags.ItemTagsProvider {
+public class ItemTagsProvider extends net.minecraft.data.tags.ItemTagsProvider implements IAE2DataProvider {
+
     public ItemTagsProvider(PackOutput packOutput, CompletableFuture<HolderLookup.Provider> registries,
                             CompletableFuture<TagLookup<Block>> blockTagsProvider, @Nullable ExistingFileHelper existingFileHelper) {
         super(packOutput, registries, blockTagsProvider, EUP2P.MOD_ID, existingFileHelper);
@@ -26,12 +26,11 @@ public class ItemTagsProvider extends net.minecraft.data.tags.ItemTagsProvider {
 
     @Override
     protected void addTags(HolderLookup.@NotNull Provider provider) {
-        GTMaterialBlocks.CABLE_BLOCKS.rowMap().forEach((prefix, map) -> {
-            map.forEach((material, blockEntry) -> {
-                tag(P2PTunnelAttunement.getAttunementTag(EUP2PItem.EU_P2P_TUNNEL))
-                        .add(blockEntry.asItem());
-            });
-        });
+        GTMaterialBlocks.CABLE_BLOCKS.rowMap().forEach((prefix, map) ->
+                map.forEach((material, blockEntry) ->
+                        tag(P2PTunnelAttunement.getAttunementTag(EUP2PItem.EU_P2P_TUNNEL))
+                                .add(blockEntry.asItem())));
+
         for (BlockEntry<LaserPipeBlock> laser : GTBlocks.LASER_PIPES) {
             tag(P2PTunnelAttunement.getAttunementTag(EUP2PItem.LASER_P2P_TUNNEL))
                     .add(laser.asItem());
